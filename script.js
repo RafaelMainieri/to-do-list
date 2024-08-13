@@ -53,10 +53,12 @@ function criarTarefa(tarefa) {
   let botaoEditar = document.createElement('button') // criando o botao
   botaoEditar.classList.add('botaoAcao') // adicionando a classe botaoAcao
   botaoEditar.innerHTML = '<i class="fa fa-pencil"></i>' // adicionando o icone de lápis
+  botaoEditar.setAttribute('onclick', 'editar(' + tarefa.id + ')') // adicionando o evento onclick="editar(tarefa.id)"
 
   let botaoExcluir = document.createElement('button'); // criando o botao
   botaoExcluir.classList.add('botaoAcao') // adicionando a classe botaoAcao
   botaoExcluir.innerHTML = '<i class="fa fa-trash"></i>' // adicionando o icone de lixeira
+  botaoExcluir.setAttribute('onclick', 'excluir(' + tarefa.id + ')') // adicionando o evento onclick="editar(tarefa.id)"
 
   // Adicionando elementos dentro do li
   div.appendChild(botaoEditar);
@@ -66,6 +68,19 @@ function criarTarefa(tarefa) {
   li.appendChild(div);
 
   return li
+}
+
+function editar(idTarefa) {
+  let li = document.getElementById(idTarefa)
+}
+
+function excluir(idTarefa) {
+  let confirmacao = window.confirm('Tem certeza que deseja excluir?')
+  if (confirmacao) {
+    let li = document.getElementById(idTarefa)
+    listaTarefas.removeChild(li)
+  }
+  // alert(idTarefa)
 }
 
 id = 0;
