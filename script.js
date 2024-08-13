@@ -1,6 +1,15 @@
+const listaTarefas = document.getElementById('listaTarefas');
 const inputNovaTarefa = document.getElementById('input');
 const botaoNovaTarefa = document.getElementById('botaoAddTarefa')
-const listaTarefas = document.getElementById('listaTarefas');
+const botaoFecharJanela = document.getElementById('botaoFecharJanela');
+const fundoJanelaEdicao = document.getElementById('fundoJanelaEdicao');
+const janelaEdicao = document.getElementById('janelaEdicao');
+const textoIdTarefa = document.getElementById('textoIdTarefa');
+const inputEdicao = document.getElementById('inputEdicao');
+const botaoAtualizarTarefa = document.getElementById('botaoAtualizarTarefa');
+
+
+
 
 inputNovaTarefa.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
@@ -31,6 +40,27 @@ botaoNovaTarefa.addEventListener('click', function () {
     inputNovaTarefa.classList.remove('atencao')
     adicionarTarefa(tarefa);
   }
+})
+
+botaoFecharJanela.addEventListener('click', function () {
+  fundoJanelaEdicao.style.display = 'none'
+  janelaEdicao.style.display = 'none'
+})
+
+botaoAtualizarTarefa.addEventListener('click', function (event) {
+  let idTarefa = textoIdTarefa.innerHTML.replace('#', '')
+
+  let tarefa = {
+    nome: inputEdicao.value,
+    id: idTarefa
+  }
+
+  let tarefaAtual = document.getElementById(idTarefa)
+
+  let li = criarTarefa(tarefa)
+  listaTarefas.replaceChild(li, tarefaAtual)
+  fundoJanelaEdicao.style.display = 'none'
+  janelaEdicao.style.display = 'none'
 })
 
 function adicionarTarefa(tarefa) {
@@ -72,6 +102,10 @@ function criarTarefa(tarefa) {
 
 function editar(idTarefa) {
   let li = document.getElementById(idTarefa)
+  fundoJanelaEdicao.style.display = 'flex'
+  janelaEdicao.style.display = 'block'
+  textoIdTarefa.textContent = '#' + idTarefa
+  inputEdicao.value = li.innerText;
 }
 
 function excluir(idTarefa) {
